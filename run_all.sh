@@ -15,13 +15,14 @@ rm -rf NMSSM-madgraph
 #Create H->hhprime process using KIT model
 name=KIT
 
-./bin/mg5_aMC
+./bin/mg5_aMC<<END
+n
 import model NMSSM_UFO
 add model hgg_plugin
 generate p p > h03 > h01 h2
 output ${name} -nojpeg
 exit
-
+END
 #Create H->hhprime process using UF model
 
 #./bin/mg5_aMC

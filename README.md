@@ -17,3 +17,18 @@ cp -r NMSSM-madgraph/models/* models/.
 rm -rf NMSSM-madgraph
 
 ```
+*Create H->hh' process using KIT model*
+```bash
+./bin/mg5_aMC
+import model NMSSM_UFO
+add model hgg_plugin
+generate p p > h03 > h01 h2
+output KIT -nojpeg
+```
+*Create H->hh' process using UF model*
+```bash
+./bin/mg5_aMC
+import model NMSSMHET_UFO
+generate p p > h03 > h01 h2
+output UF -nojpeg
+```

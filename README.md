@@ -34,11 +34,31 @@ output UF -nojpeg
 ```
 *Create first gridpack*
 ```bash
+name=KIT
+
 git clone https://github.com/cms-sw/genproductions/ -b mg265
 cd genproductions/bin/MadGraph5_aMCatNLO/
-mkdir -p cards/mycards/KIT
-cp ../../../KIT/Cards/run_card.dat cards/mycards/KIT/KIT_run_card.dat
-cp ../../../KIT/Cards/proc_card_mg5.dat cards/mycards/KIT/KIT_proc_card.dat
+mkdir -p cards/mycards/${name}
+cp ../../../${name}/Cards/run_card.dat cards/mycards/${name}/${name}_run_card.dat
+cp ../../../${name}/Cards/proc_card_mg5.dat cards/mycards/${name}/${name}_proc_card.dat
 
-./gridpack_generation.sh KIT cards/mycards/KIT
+./gridpack_generation.sh ${name} cards/mycards/${name}
 ```
+*Unpack grid-pack and add decay information for PYTHIA, and re-pack*
+```bash
+h_BR_bb=0.0
+h_BR_tautau=1.0
+hprime_BR_bb=1.0
+hprime_BR_tautau=0.0
+
+mkdir tmp
+cd tmp 
+tar -xf ../${name}_${scram_arch}_${cmssw_version}_tarball.tar.xz
+sed '/^DECAY.* 25.*/a ${h_BR_tautau} 2 -15 15' process/madevent/Cards/param_card.dat
+sed '/^DECAY.* 25.*/a ${h_BR_bb} 2 -5 5' process/madevent/Cards/param_card.dat
+sed '/^DECAY.* 35.*/a ${hprime_BR_tautau} 2 -15 15' process/madevent/Cards/param_card.dat
+sed '/^DECAY.* 35.*/a ${hprime_BR_bb} 2 -5 5' process/madevent/Cards/param_card.dat
+
+tar -cJpsf ../${name}_${scram_arch}_${cmssw_version}_tarball_updated.tar.xz *
+```
+

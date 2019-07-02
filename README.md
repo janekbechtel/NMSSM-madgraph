@@ -13,5 +13,7 @@ cd MG5_aMC_v2_6_5
 rm -rf models/hgg_plugin
 
 git clone https://github.com/janekbechtel/NMSSM-madgraph
+cp -r NMSSM-madgraph/models/* models/.
+rm -rf NMSSM-madgraph
 
 ```

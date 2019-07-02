@@ -38,10 +38,7 @@ git clone https://github.com/cms-sw/genproductions/ -b mg265
 cd genproductions/bin/MadGraph5_aMCatNLO/
 mkdir -p cards/mycards/KIT
 cp ../../../KIT/Cards/run_card.dat cards/mycards/KIT/KIT_run_card.dat
-../../../KIT/Cards/proc_card_mg5.dat cards/mycards/KIT/KIT_proc_card.dat
+cp ../../../KIT/Cards/proc_card_mg5.dat cards/mycards/KIT/KIT_proc_card.dat
 
 ./gridpack_generation.sh KIT cards/mycards/KIT
 ```
-
-```
-

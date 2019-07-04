@@ -66,10 +66,9 @@ set ignore_six_quark_processes False
 set loop_optimized_output True
 set gauge unitary
 set complex_mass_scheme False
-import model /portal/ekpbms1/home/jbechtel/h3/MG5_aMC_v2_6_5/models/NM\
-SSMHET_UFO
+import model $PWD/models/NMSSMHET_UFO
 generate g g > h03 , (h03 > h2 h01, h2 > b b~, h01 > ta- ta+)
-output $name -nojpeg
+output NMSSM_H3_MX_h1_M125_tautau_h2_MY_bb -nojpeg
 ```
 *Create first gridpack*
 ```bash

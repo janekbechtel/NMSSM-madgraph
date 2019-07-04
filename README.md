@@ -28,15 +28,51 @@ exit
 ```
 *Create H->hh' process using UF model*
 ```bash
+name=UF
+
 ./bin/mg5_aMC
-import model NMSSMHET_UFO
-generate p p > h03 > h01 h2
-output UF -nojpeg
-exit
+set default_unset_couplings 99
+set group_subprocesses Auto
+set ignore_six_quark_processes False
+set loop_optimized_output True
+set loop_color_flows False
+set gauge unitary
+set complex_mass_scheme False
+set max_npoint_for_channel 0
+import model sm
+define p = g u c d s u~ c~ d~ s~
+define j = g u c d s u~ c~ d~ s~
+define l+ = e+ mu+
+define l- = e- mu-
+define vl = ve vm vt
+define vl~ = ve~ vm~ vt~
+set default_unset_couplings 99
+set group_subprocesses Auto
+set ignore_six_quark_processes False
+set loop_optimized_output True
+set loop_color_flows False
+set gauge unitary
+set complex_mass_scheme False
+set max_npoint_for_channel 0
+import model sm
+define p = g u c d s u~ c~ d~ s~
+define j = g u c d s u~ c~ d~ s~
+define l+ = e+ mu+
+define l- = e- mu-
+define vl = ve vm vt
+define vl~ = ve~ vm~ vt~
+set group_subprocesses Auto
+set ignore_six_quark_processes False
+set loop_optimized_output True
+set gauge unitary
+set complex_mass_scheme False
+import model /portal/ekpbms1/home/jbechtel/h3/MG5_aMC_v2_6_5/models/NM\
+SSMHET_UFO
+generate g g > h03 , (h03 > h2 h01, h2 > b b~, h01 > ta- ta+)
+output $name -nojpeg
 ```
 *Create first gridpack*
 ```bash
-name=KIT
 
 git clone https://github.com/cms-sw/genproductions/ -b mg265
 cd genproductions/bin/MadGraph5_aMCatNLO/

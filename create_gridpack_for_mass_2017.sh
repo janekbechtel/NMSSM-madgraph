@@ -1,14 +1,18 @@
-for MASS_H3 in 300 400 500 600 700 
+for MASS_H3 in 240 280 320 400 500 550 600 700 800 900 1000 1200 1400 1600 1800 2000 2500 3000
 do 
-for MASS_H2 in 50 60 70
+for MASS_H2 in 60 70 75 80 85 90 95 100 110 120 130 150 170 190 250 300 350 400 450 500 550 600 650 700 750 800 850 
 do
-# MASS_H3=$1
-# MASS_H2=$2
-# W_H3=$3
-# W_H2=$4
-# TANB=$5
-W_H2=1.0
-W_H3=1.0
+SUM=$((MASS_H2+125))
+
+if [ "$SUM" -gt "$MASS_H3" ] 
+then
+   echo "Skipping "$MASS_H2" "$MASS_H3
+   continue      # Skip rest of this particular loop iteration.
+fi
+
+
+W_H2=0.001
+W_H3=0.7
 TANB=10.0
 
 cp -r models/NMSSMHET_UFO_tomanipulate models/custom/NMSSMHET_UFO_H3_M${MASS_H3}_h1_M125_tautau_h2_M${MASS_H2}_bb
@@ -77,7 +81,7 @@ source $VO_CMS_SW_DIR/cmsset_default.sh
 
 rm -r ${name}*
 
-./gridpack_generation.sh ${name} cards/mycards/${name} local ALL slc7_amd64_gcc630 CMSSW_9_3_14
+./gridpack_generation.sh ${name} cards/mycards/${name} local ALL slc7_amd64_gcc700 CMSSW_10_2_3
 
 cd -
 
